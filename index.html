@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="icon.png" type="image/png" />
+    <title>Ji</title>
+    <style>
+      @font-face {
+        font-family: "FluxischElse";
+        src: url("webfonts/FluxischElse-Light.woff") format("woff");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "FluxischElse";
+        src: url("webfonts/FluxischElse-Regular.woff") format("woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "FluxischElse";
+        src: url("webfonts/FluxischElse-Bold.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #fff;
+        color: #000;
+        font-family: "FluxischElse", system-ui, -apple-system, sans-serif;
+        font-weight: 400;
+        font-size: 3rem;
+        letter-spacing: -1px;
+        line-height: 1.3;
+        padding: clamp(1.5rem, 5vw, 3rem);
+      }
+      main {
+        width:100%;
+      }
+      p {
+        margin: 0 0 1.25em;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
+      a:hover {
+        opacity: 0.75;
+      }
+      @media (max-width: 768px) {
+        body {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>
+        Currently, I am at
+        <a href="https://green-antarctica.com/" target="_blank" rel="noopener noreferrer">Green Antarctica</a>. I also teach at Parsons. Before
+        that, I was at Base Design, Pentagram, and Math Practice.
+      </p>
+   
+      <p><a href="mailto:" target="_blank" rel="noopener noreferrer">Email</a></p>
+      <p>
+        Select clients and collaborators include Notion, Order Design, Harvard
+        GSD, Storefront for Art and Architecture, Frenzy Image, LOROD, and
+        Meatpacking District.
+      </p>
+    </main>
+  </body>
+</html>

@@ -21,68 +21,196 @@
         font-style: normal;
         font-display: swap;
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
         min-height: 100vh;
         background: #fffef7;
-        color: #000000;
+        color: #000;
         font-family: "National Park", system-ui, -apple-system, sans-serif;
         font-weight: 400;
-        font-size: 24px;
+        font-size: 18px;
         letter-spacing: -0.02em;
         line-height: 1.3;
-        padding: clamp(1.5rem, 5vw, 3rem);
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 3fr 4fr 3fr;
+        gap: 2rem;
+        align-items: start;
       }
-      main {
-        width: 50%;
+
+      .col-left,
+      .col-right {
+        align-self: start;
       }
-      p {
-        margin: 0 0 1.25em;
+
+      .col-left p {
+        margin: 0;
+        max-width: 28rem;
       }
-      p:last-child {
-        margin-bottom: 0;
+
+      .col-middle {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-width: 0;
       }
+
+      .col-right {
+        text-align: left;
+      }
+
+      .carousel {
+        position: relative;
+        width: 100%;
+        height: min(70vh, 36rem);
+      }
+
+      .carousel-track {
+        position: absolute;
+        inset: 0;
+      }
+
+      .carousel-track img {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        pointer-events: none;
+      }
+
+      .carousel-track img.is-active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .carousel-hit {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
       a {
         color: inherit;
         text-decoration: underline;
         text-underline-offset: 0.2em;
       }
+
       a:hover {
         opacity: 0.75;
       }
-      @media (max-width: 768px) {
-        body{
-          font-size: 18px;
+
+      @media (max-width: 900px) {
+        body {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto auto;
+          align-items: stretch;
         }
-        main {
-        width: 80%;
-      }
+
+        .col-left,
+        .col-right {
+          align-self: stretch;
+        }
+
+        .col-right {
+          text-align: left;
+          order: 3;
+        }
+
+        .col-middle {
+          order: 2;
+          justify-content: flex-start;
+        }
+
+        .carousel {
+          height: min(60vh, 28rem);
+        }
       }
     </style>
   </head>
   <body>
-    <main>
+    <div class="col-left">
       <p>
         Currently, I co-lead
         <a href="https://green-antarctica.com/" target="_blank" rel="noopener noreferrer">Green Antarctica</a>.
         I also teach at Parsons. Before that, I was at Base Design, Pentagram, and Math Practice.
-      </p>
-     
-      <p>
         Most of my recent work lives on
         <a href="https://www.are.na/ji-park-xdjpsnadqra/channels" target="_blank" rel="noopener noreferrer">Are.na</a>
         and
         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>.
-      </p>
-      <p>
-        <a href="mailto:jieunpark119@gmail.com">Email</a>
-      </p>
-      <p>
         Select clients and collaborators include Somssi, Notion, Order Design, Harvard GSD, Storefront for Art and Architecture, Frenzy Image, LOROD, and Meatpacking District.
       </p>
-    </main>
+    </div>
+
+    <div class="col-middle">
+      <div class="carousel" aria-roledescription="carousel" aria-label="Selected work">
+        <div class="carousel-track">
+          <img class="is-active" src="gallery/1.jpg" alt="" />
+          <img src="gallery/2.jpg" alt="" />
+          <img src="gallery/3.png" alt="" />
+          <img src="gallery/4.jpeg" alt="" />
+          <img src="gallery/5.jpg" alt="" />
+          <img src="gallery/6.png" alt="" />
+        </div>
+        <button class="carousel-hit" type="button" aria-label="Next image"></button>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <a href="mailto:jieunpark119@gmail.com">Email</a>
+    </div>
+
+    <script>
+      (function () {
+        var root = document.querySelector(".carousel");
+        if (!root) return;
+
+        var slides = Array.prototype.slice.call(root.querySelectorAll(".carousel-track img"));
+        var hit = root.querySelector(".carousel-hit");
+        var index = 0;
+        var timer;
+
+        function goTo(next) {
+          slides[index].classList.remove("is-active");
+          index = (next + slides.length) % slides.length;
+          slides[index].classList.add("is-active");
+        }
+
+        function next() {
+          goTo(index + 1);
+        }
+
+        function restart() {
+          clearInterval(timer);
+          timer = setInterval(next, 3500);
+        }
+
+        hit.addEventListener("click", function () {
+          next();
+          restart();
+        });
+
+        root.addEventListener("mouseenter", function () {
+          clearInterval(timer);
+        });
+        root.addEventListener("mouseleave", restart);
+
+        restart();
+      })();
+    </script>
   </body>
 </html>
